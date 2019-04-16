@@ -1,0 +1,22 @@
+.body{
+  display: flex;
+  justify-content: center;
+  background-image: url('../assets/img/bg.jpg');
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;
+  background-color: #999;
+
+  .content{
+    .form{
+      display: flex;
+      margin: 2rem;
+
+      .contact-form{
+        display: flex;
+        margin: 2rem;
+      }
+    }
+  }
+}

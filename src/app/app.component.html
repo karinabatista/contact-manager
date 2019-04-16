@@ -1,21 +1,105 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="body">
+  <div class="content">
+    <div class="form">
+      <mat-card>
+        <div class="title" style="text-align:center">
+            <h1>
+              Novo contato
+            </h1>
+        </div>
+        <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="sendRequest()">
+          
+          <div class="section-one" style="display: flex; flex-direction: column; margin: 2rem;">
+            <div style="margin-bottom: 1rem;">
+              <label>Dados Pessoais</label>
+            </div>
+            <mat-form-field>
+              <input matInput placeholder="Nome Completo" [formControl]="name">
+              <mat-error *ngIf="name.touched && name.errors?.required">
+                O nome é <strong>obrigatório</strong>
+              </mat-error>
+            </mat-form-field> 
+            <mat-form-field>
+              <input matInput placeholder="E-mail" [formControl]="email">
+              <mat-error *ngIf="email.errors.email" >
+                Por favor, informe um e-mail válido.
+              </mat-error>
+              <mat-error *ngIf="email.errors.required">
+                O e-mail é <strong>obrigatório</strong>
+              </mat-error>
+            </mat-form-field> 
+            <mat-form-field style="width: 120px !important;">
+              <input matInput placeholder="Telefone 1" [formControl]="phone1">
+            </mat-form-field>
+            <mat-form-field style="width: 120px !important;">
+              <input matInput placeholder="Telefone 2" [formControl]="phone2">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput #message maxlength="256" placeholder="Observação do contato" [formControl]="observation">
+              <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+            </mat-form-field>
+          </div>
+          
+          <div class="section-two"  style="display: flex; flex-direction: column; margin: 2rem;">
+            <div style="margin-bottom: 1rem;">
+              <label>Endereço Principal</label>
+            </div>
+            <mat-form-field>
+              <input matInput placeholder="CEP" [formControl]="cep1">
+            </mat-form-field>
+            <div>
+              <button mat-button color="accent" (click)="getAddress()">Buscar CEP</button>
+            </div>
+            <mat-form-field>
+              <input matInput placeholder="Logradouro" [formControl]="address1">
+              <ng-template #test><input matInput placeholder="Logradouro" [formControl]="address1"></ng-template>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Localidade" [formControl]="neighborhood1">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="UF" [formControl]="estate1">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Cidade" [formControl]="city1">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Número" [formControl]="number1">
+            </mat-form-field>
+          </div>
+            
+          <div class="section-three"  style="display: flex; flex-direction: column; margin: 2rem;">
+            <div style="margin-bottom: 1rem;">
+              <label>Endereço Alternativo</label>
+            </div>
+            <mat-form-field>
+              <input matInput placeholder="CEP" [formControl]="cep2">
+            </mat-form-field>
+            <div>
+              <button mat-button color="accent" (click)="getAddress()">Buscar CEP</button>
+            </div>
+            <mat-form-field>
+              <input matInput placeholder="Logradouro" [formControl]="address2">
+              <ng-template #test><input matInput placeholder="Logradouro" [formControl]="address2"></ng-template>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Localidade" [formControl]="neighborhood2">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="UF" [formControl]="estate2">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Cidade" [formControl]="city2">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Número" [formControl]="number2">
+            </mat-form-field>
+          </div>
+          <div style="display: flex; flex-direction: column-reverse;">
+            <button mat-flat-button color="accent" type="submit">Salvar</button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
-<router-outlet></router-outlet>
